@@ -1,10 +1,25 @@
-GIT:
-git config --global --edit
-[alias]: para criar atalhos para o git
-    c = !git add --all && git commit -m
-    s = !git status -s
-    l = !git log --pretty=format:'%C(blue)%h%C(red)%d - %C(white)%s - %C(cyan)%cn %C(green)%cr'
+[core]
+	editor = \"C:\\Users\\Renato\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\" --wait
+[user]
+	email = renato@volus.com
+	name = Renato Alves
+[alias]
+	# c => Adiciona todos os arquivos e commita de uma só vez
+	c = !git add --all && git commit -m
+	# s => Apresenta o status de forma mais resumida usando um tipo de SHORT
+	s = !git status -s
+	# s => Apresenta um log perrsonalizado com cores e formatos padronizados por mim mesmo 
+	# [%h => HASH REDUZIDA | %H => HASH COMPLETA], [%d => BRANT], [%s => ASSUNTO], 
+	# [%cn => NOME DE QUEM FEZ O COMMIT], [%cr => DATA RELATIVA DO COMMIT], [%C(blue) => COR]
+	l = !git log --pretty=format:'%C(blue)%h%C(red)%d - %C(white)%s - %C(cyan)%cn %C(green)%cr'
+	# t => tag Anotada => Cria uma TAG Anotada diretamente no nosso repositório
     t = !sh -c 'git tag -a $1 -m $1'
+	# amend => Junta o comite atual ao commit anterior, 
+	# usar issso quando acontecer de eu esquecer de alguma informação importante no 
+	# commit que já foi feito, --no-edit => Significa que não precisa alterar o comit anterior, 
+	# basta juntar os dois
     amend = !git add --all && git commit --amend --no-edit
 [push]
+	# followtags => Forçando o envio de todas as minhas TAGS ANOTADAS para o GitHub, 
+	# por padrão ele não envia as tags
     followTags = true
