@@ -1,3 +1,6 @@
+GIT:
+git config --global --edit
+
 [core]
 	editor = \"C:\\Users\\Renato\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\" --wait
 [user]
