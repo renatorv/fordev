@@ -1,0 +1,3 @@
+GIT:
+git config --global --edit
+[alias]: para criar atalhos para o git
