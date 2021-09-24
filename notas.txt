@@ -16,7 +16,7 @@ git config --global --edit
 	# [%cn => NOME DE QUEM FEZ O COMMIT], [%cr => DATA RELATIVA DO COMMIT], [%C(blue) => COR]
 	l = !git log --pretty=format:'%C(blue)%h%C(red)%d - %C(white)%s - %C(cyan)%cn %C(green)%cr'
 	# t => tag Anotada => Cria uma TAG Anotada diretamente no nosso repositório
-    t = !sh -c 'git tag -a $1 -m $1'
+    t = !sh -c 'git tag -a $1 -m $1' -
 	# amend => Junta o comite atual ao commit anterior, 
 	# usar issso quando acontecer de eu esquecer de alguma informação importante no 
 	# commit que já foi feito, --no-edit => Significa que não precisa alterar o comit anterior, 
@@ -26,3 +26,6 @@ git config --global --edit
 	# followtags => Forçando o envio de todas as minhas TAGS ANOTADAS para o GitHub, 
 	# por padrão ele não envia as tags
     followTags = true
+
+DIVERSOS:
+1. Rezo coder => Dartz
