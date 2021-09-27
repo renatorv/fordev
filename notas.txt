@@ -29,3 +29,6 @@ git config --global --edit
 
 DIVERSOS:
 1. Rezo coder => Dartz
+
+
+Terminei 2. Authentication - Domain e Data Layers
