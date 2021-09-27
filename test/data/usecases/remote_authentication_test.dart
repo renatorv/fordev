@@ -1,6 +1,7 @@
 import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fordev/data/http/http_client.dart';
+import 'package:fordev/data/http/http_error.dart';
 import 'package:fordev/data/usecases/usecases.dart';
 import 'package:fordev/domain/helpers/helpers.dart';
 import 'package:fordev/domain/usecases/authentication.dart';
@@ -57,6 +58,29 @@ void main() {
       final future = sut.auth(params);
 
       expect(future, throwsA(DomainError.unexpected));
+    },
+  );
+
+    test(
+    'Should throw InvalidCredentialerro if HttpClient return 401',
+    () async {
+      
+      final httpClient = HttpClientSpy();
+      final url = faker.internet.httpUrl();
+
+      when(httpClient.request(url: anyNamed('url'), method: anyNamed('method'), body: anyNamed('body')))
+        .thenThrow(HttpError.unautorized);
+
+      final params = AuthenticationsParams(
+        email: faker.internet.email(),
+        secret: faker.internet.password(),
+      );
+
+      final sut = RemoteAuthentication(httpClient: httpClient, url: url);
+
+      final future = sut.auth(params);
+
+      expect(future, throwsA(DomainError.invalidCredentials));
     },
   );
 }
