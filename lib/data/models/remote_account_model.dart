@@ -1,14 +1,18 @@
-
-import 'package:fordev/domain/entities/account_entity.dart';
+import '../http/http.dart';
+import '../../domain/entities/entities.dart';
 
 class RemoteAccountModel {
-
   final String accessToken;
 
   RemoteAccountModel(this.accessToken);
 
-  factory RemoteAccountModel.fromjson(Map json) => RemoteAccountModel(json['accessToken']);
+  factory RemoteAccountModel.fromjson(Map json) {
+    if (!json.containsKey('accessToken')) {
+      throw HttpError.invalidData;
+    }
 
-  AccountEntity toEntity()=> AccountEntity(accessToken);
-  
+    return RemoteAccountModel(json['accessToken']);
+  }
+
+  AccountEntity toEntity() => AccountEntity(accessToken);
 }

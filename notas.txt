@@ -31,4 +31,4 @@ DIVERSOS:
 1. Rezo coder => Dartz
 
 
-Terminei 2. Authentication - Domain e Data Layers => 5. Testando casos de exceção do HttpClient
+6. Testando caso de sucesso => 16 min 50 seg

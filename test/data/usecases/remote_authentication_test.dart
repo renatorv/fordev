@@ -2,6 +2,7 @@ import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fordev/data/http/http_client.dart';
 import 'package:fordev/data/usecases/usecases.dart';
+import 'package:fordev/domain/helpers/domain_error.dart';
 import 'package:fordev/domain/usecases/authentication.dart';
 import 'package:mockito/mockito.dart';
 
@@ -85,20 +86,46 @@ void main() {
   //   },
   // );
 
-  test(
-    'Should return an Account if HttpClient return 200',
+  // test(
+  //   'Should return an Account if HttpClient return 200',
+  //   () async {
+  //     final httpClient = HttpClientSpy();
+  //     final url = faker.internet.httpUrl();
+
+  //     final accessToken = faker.guid.guid();
+
+  //     when(httpClient.request(
+  //             url: anyNamed('url'),
+  //             method: anyNamed('method'),
+  //             body: anyNamed('body')))
+  //         .thenAnswer((_) async =>
+  //             {'accessToken': accessToken, 'name': faker.person.name()});
+
+  //     final params = AuthenticationsParams(
+  //       email: faker.internet.email(),
+  //       secret: faker.internet.password(),
+  //     );
+
+  //     final sut = RemoteAuthentication(httpClient: httpClient, url: url);
+
+  //     final account = await sut.auth(params);
+
+  //     expect(account.token, accessToken);
+  //   },
+  // );
+
+    test(
+    'Should throw UnexpectedError if HttpClient returns 200 with invalid data.',
     () async {
       final httpClient = HttpClientSpy();
       final url = faker.internet.httpUrl();
-
-      final accessToken = faker.guid.guid();
 
       when(httpClient.request(
               url: anyNamed('url'),
               method: anyNamed('method'),
               body: anyNamed('body')))
           .thenAnswer((_) async =>
-              {'accessToken': accessToken, 'name': faker.person.name()});
+              {'invalid_key': 'invalid_value'});
 
       final params = AuthenticationsParams(
         email: faker.internet.email(),
@@ -107,9 +134,9 @@ void main() {
 
       final sut = RemoteAuthentication(httpClient: httpClient, url: url);
 
-      final account = await sut.auth(params);
+      final future = await sut.auth(params);
 
-      expect(account.token, accessToken);
+      expect(future, throwsA(DomainError.unexpected));
     },
   );
 }
