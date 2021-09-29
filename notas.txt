@@ -32,3 +32,8 @@ DIVERSOS:
 
 
 6. Testando caso de sucesso => 16 min 50 seg
+
+AULAS (NÃO FIZ)
+
+2. Authentication - Domain e Data Layers => 6. Testando caso de sucesso
+18 minutos, não criei as funções pois estava com erro nas variáveis do when
